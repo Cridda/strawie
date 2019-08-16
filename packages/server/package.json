@@ -1,0 +1,47 @@
+{
+   "name": "strawie",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/bcryptjs": "^2.4.2",
+      "@types/connect-redis": "^0.0.10",
+      "@types/cors": "^2.8.5",
+      "@types/express-session": "^1.15.13",
+      "@types/graphql": "^14.2.3",
+      "@types/ioredis": "^4.0.14",
+      "@types/node": "^8.0.29",
+      "@types/nodemailer": "^6.2.1",
+      "@types/uuid": "^3.4.5",
+      "nodemon": "^1.19.1",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "private": true,
+   "dependencies": {
+      "apollo-server": "^2.8.1",
+      "apollo-server-express": "^2.8.1",
+      "bcryptjs": "^2.4.3",
+      "class-validator": "^0.9.1",
+      "connect-redis": "^3.4.2",
+      "cors": "^2.8.5",
+      "express-session": "^1.16.2",
+      "graphql": "^14.4.2",
+      "ioredis": "^4.14.0",
+      "nodemailer": "^6.3.0",
+      "pg": "^7.3.0",
+      "reflect-metadata": "^0.1.10",
+      "type-graphql": "^0.17.4",
+      "typeorm": "0.2.18",
+      "uuid": "^3.3.2"
+   },
+   "scripts": {
+      "start": "nodemon --exec ts-node src/index.ts"
+   },
+   "license": "MIT",
+   "workspaces": {
+      "nohoist": [
+         "typeorm",
+         "typeorm/**"
+      ]
+   }
+}
