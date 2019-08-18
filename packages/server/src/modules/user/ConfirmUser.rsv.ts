@@ -1,4 +1,5 @@
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import { confirmUserPrefix } from '../../constants/redisPrefixes';
 import { User } from '../../entities/User';
 import { redis } from '../../redis';
 import { MyContext } from '../../types/MyContext';
@@ -7,13 +8,14 @@ import { MyContext } from '../../types/MyContext';
 export class ConfirmUserResolver {
     @Mutation(() => Boolean, { description: 'This mutation will confirm a user after registering' })
     async confirmUser(@Arg('token') token: string, @Ctx() ctx: MyContext): Promise<boolean> {
-        const userId = await redis.get(token);
+        const prefixedToken = confirmUserPrefix + token;
+        const userId = await redis.get(prefixedToken);
         if (!userId) {
             return false;
         }
 
         await User.update({ id: parseInt(userId) }, { confirmed: true });
-        await redis.del(token);
+        await redis.del(prefixedToken);
         return true;
     }
 }
