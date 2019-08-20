@@ -1,7 +1,10 @@
-import { Field, ID, ObjectType } from 'type-graphql';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Field, ID, InputType, ObjectType } from 'type-graphql';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { GroupUser } from './GroupUser';
+import { List } from './List';
 
 @ObjectType()
+@InputType('UserInput')
 @Entity()
 export class User extends BaseEntity {
     @Field(() => ID)
@@ -16,13 +19,20 @@ export class User extends BaseEntity {
     @Column()
     firstName: string;
 
-    @Field()
-    @Column()
+    @Field({ nullable: true })
+    @Column({ nullable: true })
     lastName: string;
 
-    @Column()
+    @Column({ nullable: true })
     password: string;
 
     @Column('bool', { default: false })
     confirmed: boolean;
+
+    @Field(type => [List], { nullable: true })
+    @OneToMany(type => List, list => list.user)
+    lists: List[];
+
+    @OneToMany(type => GroupUser, groupUser => groupUser.user)
+    groupConnections: GroupUser[];
 }
