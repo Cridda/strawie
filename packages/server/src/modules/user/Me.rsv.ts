@@ -10,6 +10,7 @@ export class MeResolver {
         if (!userId) {
             return null;
         }
-        return User.findOne({ where: { id: userId } });
+        const user = await User.findOne({ where: { id: userId } });
+        return user;
     }
 }

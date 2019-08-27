@@ -10,7 +10,7 @@ export class GroupUser extends BaseEntity {
     userId: number;
     groupId: string;
 
-    @ManyToOne(type => User, user => user.groupConnections)
+    @ManyToOne(type => User, user => user.groups)
     user: User;
 
     @ManyToOne(type => Group, group => group.userConnections)

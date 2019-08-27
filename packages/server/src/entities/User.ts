@@ -1,5 +1,6 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Group } from './Group';
 import { GroupUser } from './GroupUser';
 import { List } from './List';
 
@@ -33,6 +34,7 @@ export class User extends BaseEntity {
     @OneToMany(type => List, list => list.user)
     lists: List[];
 
+    @Field(type => [Group], {nullable: true})
     @OneToMany(type => GroupUser, groupUser => groupUser.user)
-    groupConnections: GroupUser[];
+    groups: Group[];
 }

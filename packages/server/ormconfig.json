@@ -2,6 +2,7 @@
    "type": "postgres",
    "host": "localhost",
    "port": 5432,
+   "cache": true,
    "username": "postgres",
    "password": "postgres",
    "database": "strawie_dev",
