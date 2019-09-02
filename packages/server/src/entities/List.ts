@@ -1,7 +1,6 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql';
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Group } from './Group';
-import { User } from './User';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { WishItem } from './WishItem';
 
 @ObjectType()
 @InputType('ListInput')
@@ -11,16 +10,11 @@ export class List extends BaseEntity {
     @PrimaryGeneratedColumn()
     readonly id: number;
 
-    @Field(type => User)
-    @ManyToOne(type => User, user => user.lists)
-    user: User;
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    name: string;
 
-    @Field()
-    @Column()
-    lastName: string;
-
-    @Field(type => Group)
-    @OneToOne(type => Group)
-    @JoinColumn()
-    group: Group;
+    @Field(type => [WishItem], { nullable: true })
+    @OneToMany(type => WishItem, wishItem => wishItem.list, { lazy: true})
+    wishItems: WishItem[];
 }

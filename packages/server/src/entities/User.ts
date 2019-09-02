@@ -1,8 +1,6 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Group } from './Group';
 import { GroupUser } from './GroupUser';
-import { List } from './List';
 
 @ObjectType()
 @InputType('UserInput')
@@ -30,11 +28,7 @@ export class User extends BaseEntity {
     @Column('bool', { default: false })
     confirmed: boolean;
 
-    @Field(type => [List], { nullable: true })
-    @OneToMany(type => List, list => list.user)
-    lists: List[];
-
-    @Field(type => [Group], {nullable: true})
+    @Field(type => [GroupUser])
     @OneToMany(type => GroupUser, groupUser => groupUser.user)
-    groups: Group[];
+    groupConnections: GroupUser[];
 }
